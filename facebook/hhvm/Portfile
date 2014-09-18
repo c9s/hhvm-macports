@@ -40,6 +40,7 @@ use_parallel_build  yes
 configure.compiler      macports-gcc-4.8
 configure.args-append \
         -Wno-dev \
+        -DCMAKE_PREFIX_PATH=${prefix} \
         -DCMAKE_ASM_COMPILER=${configure.cc} \
         -DLIBIBERTY_LIB=${prefix}/lib/gcc48/x86_64/libiberty.a \
         -DCMAKE_INCLUDE_PATH="${prefix}/include/gcc48/c++/parallel:${prefix}/include:/usr/include" \
