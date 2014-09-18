@@ -86,7 +86,7 @@ configure.args-append \
     # }
 
 # patch.pre_args -p0
-patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.patch
+patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
 
 # configure.args-append -DINFODIR=share/info -DDOCDIR=share/doc
 # build {}
