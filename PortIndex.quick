@@ -1,5 +1,5 @@
 boost 0
 cmake 827
 hhvm 1435
-hhvm-devel 2547
-jemalloc 3651
+hhvm-devel 2562
+jemalloc 3681

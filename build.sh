@@ -24,8 +24,7 @@ time cmake . \
     -DFREETYPE_LIBRARIES=/opt/local/lib/libfreetype.dylib \
     -DLIBSQLITE3_INCLUDE_DIR=/opt/local/include \
     -DLIBSQLITE3_LIBRARY=/opt/local/lib/libsqlite3.0.dylib \
-    -DJEMALLOC_INCLUDE_DIR=/opt/local/include \
-    -DJEMALLOC_LIB=/opt/local/lib/libjemalloc.dylib \
+    -DLibYaml_INCLUDE_DIRS=/opt/local/include \
     -DMYSQL_INCLUDE_DIR=/opt/local/include/mysql55/mysql \
     -DMYSQL_LIB=/opt/local/lib/mysql55/mysql/libmysqlclient.dylib \
     -DBOOST_INCLUDEDIR=/opt/local/include \
