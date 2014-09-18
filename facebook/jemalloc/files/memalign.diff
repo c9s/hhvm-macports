@@ -1,7 +1,5 @@
-diff --git a/src/jemalloc.c b/src/jemalloc.c
-index bc350ed..8959959 100644
---- a/src/jemalloc.c
-+++ b/src/jemalloc.c
+--- src/jemalloc.c
++++ src/jemalloc.c
 @@ -1312,7 +1312,6 @@ je_valloc(size_t size)
  #define        is_malloc_(a) malloc_is_ ## a
  #define        is_malloc(a) is_malloc_(a)

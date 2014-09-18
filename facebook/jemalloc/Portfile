@@ -25,6 +25,8 @@ checksums \
 
 depends_build   port:libxslt
 
+patchfiles memalign.diff
+
 post-extract {
     # move [glob ${workpath}/*] ${worksrcpath}
     mv ${worksrcpath}/bin/pprof ${worksrcpath}/bin/jemalloc-prof
