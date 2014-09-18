@@ -1,16 +1,14 @@
 #!/bin/bash
 set -e
 MYSQL_CONN_C_DIR=$PWD/mysql-connector-c-6.1.5-osx10.7-x86
-GCC=$(which gcc-mp-4.8)
-GXX=$(which g++-mp-4.8)
-prefix=$prefix
+prefix=/opt/local
 PATH=$prefix/libexec/elftoolchain:$PATH
 git submodule update --init --recursive --force
 time cmake . \
     -Wno-dev \
-    -DCMAKE_CXX_COMPILER=$GXX \
-    -DCMAKE_C_COMPILER=$GCC \
-    -DCMAKE_ASM_COMPILER=$GCC \
+    -DCMAKE_CXX_COMPILER=$(which g++-mp-4.8) \
+    -DCMAKE_C_COMPILER=$(which gcc-mp-4.8) \
+    -DCMAKE_ASM_COMPILER=$(which gcc-mp-4.8) \
     -DLIBIBERTY_LIB=$prefix/lib/gcc48/x86_64/libiberty.a \
     -DCMAKE_PREFIX_PATH=$prefix \
     -DCMAKE_INCLUDE_PATH="$prefix/include/gcc48/c++/parallel:$prefix/include:/usr/include" \
@@ -24,6 +22,8 @@ time cmake . \
     -DFREETYPE_LIBRARIES=$prefix/lib/libfreetype.dylib \
     -DLIBSQLITE3_INCLUDE_DIR=$prefix/include \
     -DLIBSQLITE3_LIBRARY=$prefix/lib/libsqlite3.0.dylib \
+    -DJEMALLOC_INCLUDE_DIR=$prefix/include \
+    -DJEMALLOC_LIB=$prefix/lib/libjemalloc.dylib \
     -DLibYaml_INCLUDE_DIRS=$prefix/include \
     -DMYSQL_INCLUDE_DIR=$prefix/include/mysql55/mysql \
     -DMYSQL_LIB=$prefix/lib/mysql55/mysql/libmysqlclient.dylib \
