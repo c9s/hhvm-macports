@@ -10,5 +10,6 @@ ports including:
 
 Register the port source:
 
-    echo "file:/$PWD [nosync]" >> /opt/local/etc/macports/sources.conf
+    (echo "file:/$PWD [nosync]" && cat /opt/local/etc/macports/sources.conf) > sources.conf
+    mv sources.conf /opt/local/etc/macports/sources.conf
 
