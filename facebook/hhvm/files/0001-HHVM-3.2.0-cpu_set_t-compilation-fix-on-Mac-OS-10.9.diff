@@ -1,18 +1,5 @@
-From a5acfafb4419c27f9ba01734da6b47c22e42563a Mon Sep 17 00:00:00 2001
-From: c9s <yoanlin93@gmail.com>
-Date: Mon, 15 Sep 2014 23:50:53 +0800
-Subject: HHVM-3.2.0 cpu_set_t compilation fix on Mac OS 10.9
-
-OS: Mac OS 10.9
-Compiler: gcc48
----
- hphp/runtime/ext/ext_hotprofiler.h | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
-
-diff --git a/hphp/runtime/ext/ext_hotprofiler.h b/hphp/runtime/ext/ext_hotprofiler.h
-index f87dde7..3b9875e 100644
---- a/hphp/runtime/ext/ext_hotprofiler.h
-+++ b/hphp/runtime/ext/ext_hotprofiler.h
+--- hphp/runtime/ext/ext_hotprofiler.h
++++ hphp/runtime/ext/ext_hotprofiler.h
 @@ -20,6 +20,36 @@
  
  #include "hphp/runtime/ext/ext_fb.h"
