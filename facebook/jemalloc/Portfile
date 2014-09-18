@@ -25,18 +25,14 @@ checksums \
 
 depends_build   port:libxslt
 
+configure.compiler macports-gcc-4.8
+configure.args-append --disable-debug --with-jemalloc-prefix=
+
 patchfiles memalign.diff
 
 post-extract {
     # move [glob ${workpath}/*] ${worksrcpath}
-    mv ${worksrcpath}/bin/pprof ${worksrcpath}/bin/jemalloc-prof
-}
-
-post-destroot {
-    xinstall    ${worksrcpath}/lib/libjemalloc.1.dylib ${destroot}${prefix}/lib
-    xinstall    ${worksrcpath}/lib/libjemalloc.dylib ${destroot}${prefix}/lib
-    xinstall    ${worksrcpath}/lib/libjemalloc.a ${destroot}${prefix}/lib
-    xinstall -d -m 755 ${worksrcpath}/include           ${destroot}${prefix}/include
+    move ${worksrcpath}/bin/pprof ${worksrcpath}/bin/jemalloc-prof
 }
 
 test.run        yes
