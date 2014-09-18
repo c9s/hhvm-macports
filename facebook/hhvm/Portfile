@@ -85,9 +85,13 @@ configure.args-append \
     #         ${destroot}${prefix}/var/run/${name_mysql}
     # }
 
-#    patch.pre_args      -p1
-#    patchfiles          patch-cmake-install_layout.cmake.diff
+# patch.pre_args -p0
+patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.patch
 
 # configure.args-append -DINFODIR=share/info -DDOCDIR=share/doc
 # build {}
 # destroot { }
+
+subport ${name}-devel {
+    git.branch origin/master
+}
