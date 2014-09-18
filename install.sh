@@ -2,6 +2,7 @@
 portindex
 port install boost configure.compiler=macports-gcc-4.8
 port install binutils oniguruma5 autoconf automake cmake libvpx \
+        coreutils \
         libelf tbb libevent \
         libxslt gcc48 mysql55-connector-cpp \
         elftoolchain google-glog libzip \
