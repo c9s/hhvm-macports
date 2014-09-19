@@ -26,7 +26,11 @@ post-fetch {
 
 depends_build-append port:autoconf port:cmake port:automake port:gcc48 port:binutils port:coreutils
 
-depends_lib         port:oniguruma5 port:libvpx port:readline port:icu port:bzip2 \
+depends_lib         port:oniguruma5 \
+                    port:libvpx \
+                    port:readline \
+                    port:icu \
+                    port:bzip2 \
                     port:libyaml port:memcached \
                     port:libelf port:tbb port:libevent \
                     port:libxslt port:mysql55-connector-cpp \
@@ -71,7 +75,7 @@ configure.args-append \
         -DCURL_LIBRARY=${prefix}/lib/libcurl.dylib
         
 variant typechecker description {Enable HHVM Typechecker} { 
-    depends_lib-append ocaml
+    depends_lib-append port:ocaml port:opam
     build.target-append hack
     # configure.args-append -DXXXXX
 }
