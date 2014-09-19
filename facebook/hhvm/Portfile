@@ -70,13 +70,19 @@ configure.args-append \
         -DCURL_INCLUDE_DIR=${prefix}/include \
         -DCURL_LIBRARY=${prefix}/lib/libcurl.dylib
         
+variant typechecker description {Enable HHVM Typechecker} { 
+    depends_lib-append ocaml
+    build.target-append hack
+    # configure.args-append -DXXXXX
+}
+
 # distfiles
 # startupitem.create      yes
 # startupitem.executable  ${prefix}/lib/${name_mysql}/bin/mysqld --user=${mysqluser}
 
 pre-destroot {
     # Fix the library linking path
-    # install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${worksrcpath}/hphp/hhvm/hhvm
+    install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${worksrcpath}/hphp/hhvm/hhvm
 }
 
 
