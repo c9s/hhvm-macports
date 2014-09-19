@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 
 name                hhvm
-version             3.2.0
+version             3.2
 maintainers         c9s
 categories          lang
 license             ZEND
@@ -21,13 +21,13 @@ git.branch          origin/HHVM-${version}
 post-fetch {
     # Does the github portgroup support 'clone --recursive'?
     # This will be removed once the python re-write is complete.
-    system -W ${worksrcpath} "git submodule update --init"
+    system -W ${worksrcpath} "git submodule update --init --recursive --force"
 }
 
 depends_build-append port:autoconf port:cmake port:automake port:gcc48 port:binutils port:coreutils
 
 depends_lib         port:oniguruma5 port:libvpx port:readline port:icu port:bzip2 \
-                    port:ocaml port:libyaml port:memcached \
+                    port:libyaml port:memcached \
                     port:libelf port:tbb port:libevent \
                     port:libxslt port:mysql55-connector-cpp \
                     port:elftoolchain port:google-glog port:libzip \
@@ -35,13 +35,14 @@ depends_lib         port:oniguruma5 port:libvpx port:readline port:icu port:bzip
 
 use_parallel_build  yes
 
-# configure.compiler  apple-gcc-4.2
-# -DCMAKE_CXX_COMPILER=${prefix}/bin/g++-mp-4.8
-# -DCMAKE_C_COMPILER=${prefix}/bin/gcc-mp-4.8
+# -DCMAKE_C_COMPILER=${configure.cc}
+# -DCMAKE_CXX_COMPILER=${configure.cxx}
+
 configure.compiler      macports-gcc-4.8
 configure.args-append \
         -Wno-dev \
         -DCMAKE_PREFIX_PATH=${prefix} \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
         -DCMAKE_ASM_COMPILER=${configure.cc} \
         -DLIBIBERTY_LIB=${prefix}/lib/gcc48/x86_64/libiberty.a \
         -DCMAKE_INCLUDE_PATH="${prefix}/include/gcc48/c++/parallel:${prefix}/include:/usr/include" \
@@ -69,23 +70,15 @@ configure.args-append \
         -DCURL_INCLUDE_DIR=${prefix}/include \
         -DCURL_LIBRARY=${prefix}/lib/libcurl.dylib
         
-    # distfiles
-    # startupitem.create      yes
-    # startupitem.executable  ${prefix}/lib/${name_mysql}/bin/mysqld --user=${mysqluser}
-    #
-    # destroot {
-    #     xinstall -m 755 -o root -d \
-    #         ${destroot}${prefix}/var/run
-    #     xinstall -m 755 -o ${mysqluser} -g ${mysqluser} -d \
-    #         ${destroot}${prefix}/etc/${name_mysql} \
-    #         ${destroot}${prefix}/var/db/${name_mysql} \
-    #         ${destroot}${prefix}/var/log/${name_mysql} \
-    #         ${destroot}${prefix}/var/run/${name_mysql}
-    #     destroot.keepdirs-append  \
-    #         ${destroot}${prefix}/var/db/${name_mysql} \
-    #         ${destroot}${prefix}/var/log/${name_mysql} \
-    #         ${destroot}${prefix}/var/run/${name_mysql}
-    # }
+# distfiles
+# startupitem.create      yes
+# startupitem.executable  ${prefix}/lib/${name_mysql}/bin/mysqld --user=${mysqluser}
+
+pre-destroot {
+    # Fix the library linking path
+    # install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${worksrcpath}/hphp/hhvm/hhvm
+}
+
 
 # patch.pre_args -p0
 patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
