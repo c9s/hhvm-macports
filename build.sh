@@ -4,7 +4,6 @@ MYSQL_CONN_C_DIR=$PWD/mysql-connector-c-6.1.5-osx10.7-x86
 prefix=/opt/local
 PATH=$prefix/libexec/elftoolchain:$PATH
 PATH=$prefix/libexec/ocaml3:$PATH
-git submodule update --init --recursive --force
 
 # workable revision: 01228273b8cf709aacbd3df1c51b1e690ecebac8
 time cmake . \
