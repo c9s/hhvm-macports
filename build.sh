@@ -4,6 +4,7 @@ MYSQL_CONN_C_DIR=$PWD/mysql-connector-c-6.1.5-osx10.7-x86
 prefix=/opt/local
 PATH=$prefix/libexec/elftoolchain:$PATH
 git submodule update --init --recursive --force
+
 time cmake . \
     -Wno-dev \
     -DCMAKE_CXX_COMPILER=$(which g++-mp-4.8) \
@@ -31,11 +32,13 @@ time cmake . \
     -DBOOST_LIBRARYDIR=$prefix/lib \
     -DBoost_USE_STATIC_LIBS=ON \
     -DPCRE_INCLUDE_DIR=$prefix/include \
-    -DPCRE_LIBRARY=$prefix/lib/libpcre.dylib \
-    -DREADLINE_INCLUDE_DIR=$prefix/include \
-    -DREADLINE_LIBRARY=$prefix/lib/libreadline.dylib \
-    -DCURL_INCLUDE_DIR=$prefix/include \
-    -DCURL_LIBRARY=$prefix/lib/libcurl.dylib
+    -DPCRE_LIBRARY=$prefix/lib/libpcre.dylib  
+make -j4
+
+    # -DCURL_INCLUDE_DIR=$prefix/include \
+    # -DCURL_LIBRARY=$prefix/lib/libcurl.dylib
+    # -DREADLINE_INCLUDE_DIR=$prefix/include \
+    # -DREADLINE_LIBRARY=$prefix/lib/libreadline.dylib \
 
 
     # -DMYSQL_INCLUDE_DIR=$MYSQL_CONN_C_DIR/include \

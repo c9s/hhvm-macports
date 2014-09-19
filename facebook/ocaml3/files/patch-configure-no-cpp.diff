@@ -1,0 +1,11 @@
+--- configure	2014-09-19 11:15:19.000000000 +0900
++++ configure.orig	2014-09-19 11:15:34.000000000 +0900
+@@ -259,7 +259,7 @@
+     bytecccompopts="-fno-defer-pop $gcc_warnings -DSHRINKED_GNUC"
+     mathlib="";;
+   *,*-*-darwin*)
+-    bytecccompopts="-fno-defer-pop --no-cpp-precomp $gcc_warnings"
++    bytecccompopts="-fno-defer-pop -no-cpp-precomp $gcc_warnings"
+     mathlib=""
+     # Tell gcc that we can use 32-bit code addresses for threaded code
+     # unless we are compiled for a shared library (-fPIC option)
