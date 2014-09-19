@@ -25,7 +25,7 @@ checksums \
 
 depends_build   port:libxslt
 
-configure.compiler macports-gcc-4.8
+# configure.compiler macports-gcc-4.8
 configure.args-append --disable-debug --with-jemalloc-prefix=
 
 patchfiles memalign.diff
