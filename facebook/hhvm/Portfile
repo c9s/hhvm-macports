@@ -5,12 +5,12 @@ PortGroup           cmake 1.0
 
 name                hhvm
 version             3.2
-maintainers         c9s
+maintainers         gmail.com:yoanlin93
 categories          lang
 license             ZEND
-description         HHVM is an open-source virtual machine designed for executing programs written in Hack and PHP. HHVM uses a just-in-time (JIT) compilation approach to achieve superior performance while maintaining the flexibility that PHP developers are accustomed to. http://hhvm.com
+description         HHVM is an open-source virtual machine designed for executing programs written in Hack and PHP.
 long_description    ${name}: ${description}
-
+homepage            http://hhvm.com
 platforms           darwin
 
 fetch.type          git
@@ -23,7 +23,7 @@ post-fetch {
     system -W ${worksrcpath} "git submodule update --init --recursive --force"
 }
 
-depends_build-append port:autoconf port:cmake port:automake port:gcc48 port:binutils port:coreutils
+depends_build-append port:autoconf port:automake port:gcc48 port:binutils port:coreutils
 
 depends_lib         port:oniguruma5 \
                     port:libvpx \
@@ -32,7 +32,9 @@ depends_lib         port:oniguruma5 \
                     port:bzip2 \
                     port:libyaml port:memcached \
                     port:libelf port:tbb port:libevent \
-                    port:libxslt port:mysql55-connector-cpp \
+                    port:libxslt \
+                    port:mysql55 \
+                    port:mysql55-connector-cpp \
                     port:elftoolchain port:google-glog port:libzip \
                     port:protobuf-c port:protobuf-cpp port:ncurses port:pcre
 
@@ -55,7 +57,7 @@ configure.args-append \
         -DFREETYPE_INCLUDE_DIRS=${prefix}/include/freetype2 \
         -DFREETYPE_LIBRARIES=${prefix}/lib/libfreetype.dylib \
         -DLIBSQLITE3_INCLUDE_DIR=${prefix}/include \
-        -DLIBSQLITE3_LIBRARY=${prefix}/lib/libsqlite3.0.dylib \
+        -DLIBSQLITE3_LIBRARY=${prefix}/lib/libsqlite3.dylib \
         -DJEMALLOC_INCLUDE_DIR=${prefix}/include \
         -DJEMALLOC_LIB=${prefix}/lib/libjemalloc.dylib \
         -DMYSQL_INCLUDE_DIR=${prefix}/include/mysql55/mysql \
@@ -82,6 +84,6 @@ post-destroot {
 
 patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
 
-subport ${name}-devel {
-    git.branch origin/master
+subport ${name}-3.1 {
+    git.branch origin/HHVM-3.1
 }
