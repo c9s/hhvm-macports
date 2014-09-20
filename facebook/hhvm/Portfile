@@ -27,11 +27,19 @@ depends_build-append port:autoconf port:automake port:gcc48 port:binutils port:c
 
 depends_lib         port:oniguruma5 \
                     port:libvpx \
+                    port:libxml2 \
                     port:readline \
+                    port:libmcrypt \
                     port:icu \
+                    port:libiconv \
+                    port:ImageMagick \
                     port:bzip2 \
-                    port:libyaml port:memcached \
-                    port:libelf port:tbb port:libevent \
+                    port:libyaml \
+                    port:memcached \
+                    port:google-perftools \
+                    port:libelf \
+                    port:tbb \
+                    port:libevent \
                     port:libxslt \
                     port:mysql55 \
                     port:mysql55-connector-cpp \
