@@ -84,11 +84,9 @@ variant typechecker description {Enable HHVM Typechecker} {
 # startupitem.create      yes
 # startupitem.executable  ${prefix}/lib/${name_mysql}/bin/mysqld --user=${mysqluser}
 
-pre-destroot {
-    # Fix the library linking path
-    install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${worksrcpath}/hphp/hhvm/hhvm
+post-destroot {
+    system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${prefix}/bin/hhvm"
 }
-
 
 # patch.pre_args -p0
 patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
