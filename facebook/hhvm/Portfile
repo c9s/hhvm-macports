@@ -15,7 +15,6 @@ platforms           darwin
 
 fetch.type          git
 git.url             git://github.com/facebook/hhvm.git
-# git.branch          HHVM-${version}
 git.branch          origin/HHVM-${version}
 
 post-fetch {
@@ -38,9 +37,6 @@ depends_lib         port:oniguruma5 \
                     port:protobuf-c port:protobuf-cpp port:ncurses port:pcre
 
 use_parallel_build  yes
-
-# -DCMAKE_C_COMPILER=${configure.cc}
-# -DCMAKE_CXX_COMPILER=${configure.cxx}
 
 configure.compiler      macports-gcc-4.8
 configure.args-append \
@@ -80,20 +76,11 @@ variant typechecker description {Enable HHVM Typechecker} {
     # configure.args-append -DXXXXX
 }
 
-# distfiles
-# startupitem.create      yes
-# startupitem.executable  ${prefix}/lib/${name_mysql}/bin/mysqld --user=${mysqluser}
-
 post-destroot {
     system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${prefix}/bin/hhvm"
 }
 
-# patch.pre_args -p0
 patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
-
-# configure.args-append -DINFODIR=share/info -DDOCDIR=share/doc
-# build {}
-# destroot { }
 
 subport ${name}-devel {
     git.branch origin/master
