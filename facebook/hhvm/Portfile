@@ -86,7 +86,7 @@ variant typechecker description {Enable HHVM Typechecker} {
 }
 
 post-destroot {
-    system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${prefix}/bin/hhvm"
+    system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${destroot}/bin/hhvm"
 }
 
 patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
