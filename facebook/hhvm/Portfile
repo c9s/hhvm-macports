@@ -42,7 +42,6 @@ depends_lib         port:oniguruma5 \
                     port:libevent \
                     port:libxslt \
                     port:mysql55 \
-                    port:mysql55-connector-cpp \
                     port:elftoolchain port:google-glog port:libzip \
                     port:protobuf-c port:protobuf-cpp port:ncurses port:pcre
 
