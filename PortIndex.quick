@@ -1,6 +1,8 @@
-boost 0
-cmake 827
-hhvm 1435
-hhvm-3.1 2328
-jemalloc 3211
-ocaml3 3620
+boost-gcc 0
+cmake 828
+hhvm 1436
+hhvm-3.1 2396
+hhvm-3.2 3326
+hhvm-3.3 4256
+jemalloc 5186
+ocaml3 5595

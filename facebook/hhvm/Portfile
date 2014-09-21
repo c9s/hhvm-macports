@@ -23,6 +23,8 @@ post-fetch {
     system -W ${worksrcpath} "git submodule update --init --recursive --force"
 }
 
+conflicts ocaml3 ocaml
+
 depends_build-append port:autoconf port:automake port:gcc48 port:binutils port:coreutils
 
 depends_lib         port:oniguruma5 \
@@ -42,6 +44,7 @@ depends_lib         port:oniguruma5 \
                     port:libevent \
                     port:libxslt \
                     port:mysql55 \
+                    port:boost-gcc \
                     port:elftoolchain port:google-glog port:libzip \
                     port:protobuf-c port:protobuf-cpp port:ncurses port:pcre
 
@@ -69,8 +72,8 @@ configure.args-append \
         -DJEMALLOC_LIB=${prefix}/lib/libjemalloc.dylib \
         -DMYSQL_INCLUDE_DIR=${prefix}/include/mysql55/mysql \
         -DMYSQL_LIB=${prefix}/lib/mysql55/mysql/libmysqlclient.dylib \
-        -DBOOST_INCLUDEDIR=${prefix}/include \
-        -DBOOST_LIBRARYDIR=${prefix}/lib \
+        -DBOOST_INCLUDEDIR=${prefix}/boost-gcc/include \
+        -DBOOST_LIBRARYDIR=${prefix}/boost-gcc/lib \
         -DBoost_USE_STATIC_LIBS=ON \
         -DPCRE_INCLUDE_DIR=${prefix}/include \
         -DPCRE_LIBRARY=${prefix}/lib/libpcre.dylib \
@@ -79,10 +82,12 @@ configure.args-append \
         -DCURL_INCLUDE_DIR=${prefix}/include \
         -DCURL_LIBRARY=${prefix}/lib/libcurl.dylib
         
-variant typechecker description {Enable HHVM Typechecker} { 
+variant hack description {Enable HHVM Typechecker} { 
     depends_lib-append port:ocaml port:opam
     build.target-append hack
-    # configure.args-append -DXXXXX
+    post-destroot {
+        xinstall -m 755 -W ${worksrcpath}/hphp/hack/bin hh_single_type_check hh_client hh_server ${destroot}${prefix}/bin
+    }
 }
 
 post-destroot {
@@ -96,7 +101,6 @@ subport ${name}-3.1 {
 
 subport ${name}-3.2 {
     git.branch origin/HHVM-3.2
-    patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
 }
 
 subport ${name}-3.3 {

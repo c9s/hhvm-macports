@@ -1,0 +1,9 @@
+Http {
+  SlowQueryThreshold = 30000
+}
+ResourceLimit { 
+    SocketDefaultTimeout=30
+}
+Eval {
+    Jit=false
+}

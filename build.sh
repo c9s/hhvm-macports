@@ -3,8 +3,10 @@ set -e
 MYSQL_CONN_C_DIR=$PWD/mysql-connector-c-6.1.5-osx10.7-x86
 prefix=/opt/local
 PATH=$prefix/libexec/elftoolchain:$PATH
-PATH=$prefix/libexec/ocaml3:$PATH
+# PATH=$prefix/libexec/ocaml3:$PATH
 
+find . -type f -iname "CMakeCache.txt" -delete
+find . -type d -iname "CMakeFiles" | xargs -I{} rm -rf {}
 # workable revision: 01228273b8cf709aacbd3df1c51b1e690ecebac8
 time cmake . \
     -Wno-dev \
