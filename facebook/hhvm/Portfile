@@ -89,8 +89,16 @@ post-destroot {
     system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${destroot}/bin/hhvm"
 }
 
-patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
 
 subport ${name}-3.1 {
     git.branch origin/HHVM-3.1
+}
+
+subport ${name}-3.2 {
+    git.branch origin/HHVM-3.2
+    patchfiles 0001-HHVM-3.2.0-cpu_set_t-compilation-fix-on-Mac-OS-10.9.diff
+}
+
+subport ${name}-3.3 {
+    git.branch origin/HHVM-3.3
 }
