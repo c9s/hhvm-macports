@@ -14,6 +14,14 @@ Register the port source:
     mv sources.conf /opt/local/etc/macports/sources.conf
     port sync
 
+Register prebuilt archive site
+
+    $ vim /opt/local/etc/macports/archive_sites.conf
+
+    name corneltek
+    urls http://packages.corneltek.com
+
 Install HHVM
 
+    port install hhvm-3.2
     port install hhvm-3.2 +hack
