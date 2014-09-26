@@ -12,4 +12,8 @@ Register the port source:
 
     (echo "file:/$PWD [nosync]" && cat /opt/local/etc/macports/sources.conf) > sources.conf
     mv sources.conf /opt/local/etc/macports/sources.conf
+    port sync
 
+Install HHVM
+
+    port install hhvm-3.2 +hack
