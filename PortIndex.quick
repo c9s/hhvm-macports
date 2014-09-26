@@ -1,8 +1,9 @@
 boost-gcc 0
 cmake 828
 hhvm 1436
-hhvm-3.1 2396
-hhvm-3.2 3326
-hhvm-3.3 4256
-jemalloc 5186
-ocaml3 5595
+hhvm-3.1 2411
+hhvm-3.2 3356
+hhvm-3.3 4301
+hhvm-server 5246
+jemalloc 5372
+ocaml3 5781
