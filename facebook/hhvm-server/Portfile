@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem          1.0
+
+name                hhvm-server
+version             3
+
+license             BSD
+description         Run HHVM as server
+distfiles
+
+depends_run         port:hhvm
+use_configure       no
+
+supported_archs     noarch
+
+if {"darwin" eq ${os.platform} && ${os.major} > 8} {
+    set hhvmuser       _hhvm
+} else {
+    set hhvmuser       hhvm
+}
+
+set server_port 8000
+add_users ${hhvmuser} group=${hhvmuser} realname=HHVM\ Server
+
+startupitem.create      yes
+startupitem.executable  ${prefix}/bin/hhvm --mode server \
+        --user ${hhvmuser} \
+        --config ${prefix}/etc/hhvm/server.hdf \
+        -vServer.Type=fastcgi \
+        -vServer.Port=${server_port}
+
+
+fetch {}
+extract {}
+build {}
+destroot {
+    xinstall -m 644 ${filespath}/server.hdf ${destroot}/etc/hhvm
+
+    xinstall -m 755 -o root -d ${destroot}${prefix}/var/run
+
+    xinstall -m 755 -o ${hhvmuser} -g ${hhvmuser} -d \
+        ${destroot}${prefix}/etc/hhvm \
+        ${destroot}${prefix}/var/db/hhvm \
+        ${destroot}${prefix}/var/log/hhvm \
+        ${destroot}${prefix}/var/run/hhvm
+
+    destroot.keepdirs-append  \
+        ${destroot}${prefix}/var/db/hhvm \
+        ${destroot}${prefix}/var/log/hhvm \
+        ${destroot}${prefix}/var/run/hhvm
+}

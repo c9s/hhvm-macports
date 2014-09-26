@@ -5,5 +5,5 @@ hhvm-3.1 2411
 hhvm-3.2 3356
 hhvm-3.3 4301
 hhvm-server 5246
-jemalloc 5372
-ocaml3 5781
+jemalloc 5404
+ocaml3 5813
