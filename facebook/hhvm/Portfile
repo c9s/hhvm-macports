@@ -14,7 +14,7 @@ homepage            http://hhvm.com
 platforms           darwin
 
 fetch.type          git
-git.url             git://github.com/facebook/hhvm.git
+git.url             git://github.com/c9s/hhvm.git
 git.branch          origin/HHVM-${version}
 
 post-fetch {
@@ -22,8 +22,6 @@ post-fetch {
     # This will be removed once the python re-write is complete.
     system -W ${worksrcpath} "git submodule update --init --recursive --force"
 }
-
-conflicts ocaml3 ocaml
 
 depends_build-append port:autoconf port:automake port:gcc48 port:binutils port:coreutils
 
@@ -72,9 +70,13 @@ configure.args-append \
         -DJEMALLOC_LIB=${prefix}/lib/libjemalloc.dylib \
         -DMYSQL_INCLUDE_DIR=${prefix}/include/mysql55/mysql \
         -DMYSQL_LIB=${prefix}/lib/mysql55/mysql/libmysqlclient.dylib \
+        -DBoost_DEBUG=ON \
+        -DBoost_LIBRARY_DIR=${prefix}/boost-gcc/lib \
+        -DBoost_INCLUDE_DIR=${prefix}/boost-gcc/include \
+        -DBoost_USE_STATIC_LIBS=ON \
+        -DBOOST_ROOT=${prefix}/boost-gcc \
         -DBOOST_INCLUDEDIR=${prefix}/boost-gcc/include \
         -DBOOST_LIBRARYDIR=${prefix}/boost-gcc/lib \
-        -DBoost_USE_STATIC_LIBS=ON \
         -DPCRE_INCLUDE_DIR=${prefix}/include \
         -DPCRE_LIBRARY=${prefix}/lib/libpcre.dylib \
         -DREADLINE_INCLUDE_DIR=${prefix}/include \
@@ -84,14 +86,14 @@ configure.args-append \
         
 variant hack description {Enable HHVM Typechecker} { 
     depends_lib-append port:ocaml port:opam
-    build.target-append hack
+    # build.target-append hack
     post-destroot {
         xinstall -m 755 -W ${worksrcpath}/hphp/hack/bin hh_single_type_check hh_client hh_server ${destroot}${prefix}/bin
     }
 }
 
 post-destroot {
-    system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${destroot}/bin/hhvm"
+    system "install_name_tool -change libjemalloc.1.dylib ${prefix}/lib/libjemalloc.1.dylib ${destroot}${prefix}/bin/hhvm"
 }
 
 
