@@ -55,9 +55,10 @@ configure.args-append \
         -DCMAKE_PREFIX_PATH=${prefix} \
         -DCMAKE_INSTALL_PREFIX=${prefix} \
         -DCMAKE_ASM_COMPILER=${configure.cc} \
-        -DLIBIBERTY_LIB=${prefix}/lib/gcc48/x86_64/libiberty.a \
         -DCMAKE_INCLUDE_PATH="${prefix}/include/gcc48/c++/parallel:${prefix}/include:/usr/include" \
         -DCMAKE_LIBRARY_PATH="${prefix}/lib:/usr/lib" \
+        -DLIBIBERTY_LIB=${prefix}/lib/gcc48/x86_64/libiberty.a \
+        -DBINUTIL_LIB=$prefix/lib/gcc48/x86_64/libiberty.a \
         -DLIBDWARF_LIBRARIES=${prefix}/lib/elftoolchain/libdwarf.3.dylib \
         -DLIBDWARF_INCLUDE_DIRS=${prefix}/include/elftoolchain \
         -DLIBEVENT_LIB=${prefix}/lib/libevent.dylib \
@@ -115,7 +116,9 @@ post-destroot {
 }
 
 
-
+subport ${name}-2.4 {
+    git.branch origin/HHVM-2.4
+}
 
 
 subport ${name}-3.1 {
